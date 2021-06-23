@@ -23,6 +23,19 @@ const Dashboard = () => {
       <Link to="/dashboard/noticiasfisico">
         <h2>Noticias de Fisicoculturismo</h2>
       </Link>
+      <Link to="/dashboard/partidosvoley">
+        <h2>Partidos de Voley</h2>
+      </Link>
+      
+      <Link to="/dashboard/partidosfutbol">
+        <h2>Partidos de Futbol</h2>
+      </Link>
+      <Link to="/dashboard/partidoshandball">
+        <h2>Partidos de Handball</h2>
+      </Link>
+      <Link to="/dashboard/partidosbasket">
+      <h2>Partidos de Basket</h2>
+      </Link>
     </div>
   );
 };

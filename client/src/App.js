@@ -6,13 +6,20 @@ import NoticiaFutbolRender from "./Components/dashboard/NoticiasFutbol/NoticiaFu
 import NoticiaRender from "./Components/dashboard/NoticiasGeneral/NoticiaRender";
 import NoticiaHandballRender from "./Components/dashboard/NoticiasHandball/NoticiaHandballRender";
 import NoticiaVoleyRender from "./Components/dashboard/Noticiasvoley/NoticiaVoleyRender";
+import PartidoBasketRender from "./Components/dashboard/PartidosBasket/PartidoBasketRender";
+import PartidoFutbolRender from "./Components/dashboard/PartidosFutbol/PartidoFutbolRender";
+import PartidoHandballRender from "./Components/dashboard/PartidosHandball/PartidoHandballRender";
 import PartidoVoleyRender from "./Components/dashboard/PartidosVoley/PartidoVoleyRender";
+import Noticia from "./Components/Views/Noticia";
 import Noticias from "./Components/Views/Noticias";
 import NoticiasBasket from "./Components/Views/NoticiasBasket";
 import NoticiasFisico from "./Components/Views/NoticiasFisico";
 import NoticiasFutbol from "./Components/Views/NoticiasFutbol";
 import NoticiasHandball from "./Components/Views/NoticiasHandball";
 import NoticiasVoley from "./Components/Views/NoticiasVoley";
+import PartidoBasket from "./Components/Views/PartidoBasket";
+import PartidoFutbol from "./Components/Views/PartidoFutbol";
+import PartidoHandball from "./Components/Views/PartidoHandball";
 import PartidoVoley from "./Components/Views/PartidoVoley";
 
 function App() {
@@ -53,6 +60,28 @@ function App() {
             component={PartidoVoleyRender}
           />
           <Route path="/partidosvoley" component={PartidoVoley} />
+        <Route
+          path="/dashboard/partidosfutbol"
+          component={PartidoFutbolRender}
+        />
+        <Route
+          path="/partidosfutbol"
+          component={PartidoFutbol}
+        />
+        <Route
+        path="/dashboard/partidoshandball"
+        component={PartidoHandballRender}
+        />
+        <Route 
+        path="/partidoshandball"
+        component={PartidoHandball}
+        />
+         <Route path="/partidosbasket" component={PartidoBasket}/>
+        <Route 
+          path="/dashboard/partidosbasket"
+          component={PartidoBasketRender}
+          />
+        <Route path="/noticia/:id" component={Noticia}/>
         </Router>
       </div>
     </div>
