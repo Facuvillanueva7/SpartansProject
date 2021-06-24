@@ -64,7 +64,7 @@ const NoticiaRender = () => {
                         {noticia.Title}
                     </td>
                     <td>{noticia.Copete}</td>
-                    <td>{noticia.Body}</td>
+                    <td>{noticia.Body.substring(0, 50)}</td>
                     <td>{noticia.Fuente}</td>
                     <td><button
                     className="btn btn-success"

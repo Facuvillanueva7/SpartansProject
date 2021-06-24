@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
 
 const Noticias = () => {
   const [noticias, setNoticias] = useState([]);
   /* const [noticia,setNoticia]= useState() */
-  const [currentId,setCurrentId]= useState("")
+  const [currentId, setCurrentId] = useState("");
   const getNoticias = async () => {
     await db
       .collection("Noticias-general")
@@ -22,18 +22,20 @@ const Noticias = () => {
     getNoticias();
   });
   const getNoticiaIndividual = async (noticiaObject) => {
-try {
-    if( currentId ) {
-  const data =   await db.collection("Noticias-general").doc(currentId).get()
-      console.log(data.id);
+    try {
+      if (currentId) {
+        const data = await db
+          .collection("Noticias-general")
+          .doc(currentId)
+          .get();
+        console.log(data.id);
+      }
+    } catch (error) {
+      console.error(error);
     }
-} catch (error) {
-  console.error(error);
-}
-  } 
+  };
   return (
     <>
-    
       <div>
         <div className="col-md-4 p-2">
           {noticias.map((noticia) => (
@@ -48,16 +50,17 @@ try {
                       onClick={getNoticiaIndividual}
                     />
                   )}
-       
-              <h4 onClick={()=>setCurrentId(noticia.id)}>{noticia.Title}</h4>
-              <Link to={"./noticia/" + currentId}>
-                  <p>{noticia.Body}</p>
-                  </Link>
+                  <Link to={"./noticia/" + noticia.id}>
+                    <h4 onClick={() => setCurrentId(noticia.id)}>
+                      {noticia.Title}
+                    </h4>
 
-                  <p>{noticia.Copete}</p>
-                  <p>{noticia.Description}</p>
-                  <p>{noticia.Fuente}</p>
-                  <p>{noticia.Fecha}</p>
+                    <p>{noticia.Body.substring(0, 100)}</p>
+
+                    <p>{noticia.Copete}</p>
+                    <p>{noticia.Fuente}</p>
+                    <p>{noticia.Fecha}</p>
+                  </Link>
                 </div>
               </div>
             </div>

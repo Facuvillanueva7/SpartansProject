@@ -1,11 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import {db} from '../../config/firebase'
 const Noticia = () => {
     const  {id}    = useParams()
    /*  const [noticia,setNoticia]= useState([]); */
-    const [Body, setBody]= useState("");
-    const [NoticiaImg, setNoticiaImg]= useState("")
+   const [Title, setTitle] = useState('')
+   const [Body, setBody] = useState('')
+   const [Copete, setCopete] = useState('')
+   const [Fecha, setFecha] = useState('')
+   const [NoticiaImg, setNoticiaImg] = useState('')
+   const [Fuente, setFuente] = useState('')
     const getNoticia = async()=>{
             await db 
            .collection("Noticias-general").doc(id)
@@ -13,8 +17,12 @@ const Noticia = () => {
            .then((doc=>{
                if (doc.exists){
                /*     setNoticia(doc) */
+               setTitle(doc.data().Title)
                setBody(doc.data().Body)
+               setCopete(doc.data().Copete)
+               setFecha(doc.data().Fecha)
                setNoticiaImg(doc.data().NoticiaImg)
+               setFuente(doc.data().Fuente)
                    console.log("Document data:", Body, NoticiaImg);
                } else {
                    console.log("No matchs");
@@ -32,28 +40,21 @@ const Noticia = () => {
                  
          /* console.log(noticia.data());  */
     }
-   /*  useEffect(()=>{
+    useEffect(()=>{
         getNoticia()
-    }) */
+    })
     return (
         <>
         <div>
-           
-            <h2 onMouseOver={getNoticia}>Lorem ipsum dolor sit amet consectetur.</h2>
-           {/*  <h2>{id}</h2>
-             {noticia.map((noticia)=>(
-                 <div className="card-body" key={noticia.id}>
-                     <div className="card-header">
-                         <h2>{noticia.Title}</h2>
-                     </div>
-                     <img src={noticia?.NoticiaImg}  style ={{width:"50%"}}alt="sample" />
-                 </div>
-             ))} */}
              {<>
-                 <h2>{Body}</h2>
+                <h2>{Title}</h2>
+                <h5>{Copete}</h5>
+                 <p>{Body}</p>
                  <div className="card-body">
                     <img src={NoticiaImg} alt="sample" />
                  </div>
+                 <p>{Fecha}</p>
+                 <p>{Fuente}</p>
                  </>
              }
         </div>
