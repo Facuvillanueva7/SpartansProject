@@ -61,7 +61,7 @@ const PartidoFutbolForm = (props) => {
     }
     setIsLoading(false);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const PartidoFutbolImg = storage
       .ref(`Partidos-Futbol-Images/${file.name}`)
@@ -105,10 +105,15 @@ const PartidoFutbolForm = (props) => {
 /*         addOrEditPartidoVoley({ ...values, PartidoVoleyImg2: url2 });  */
         setImgB(url2)
         console.log(url2);
-      },
-      addOrEditPartidoFutbol({...values,imgA,imgB})
+      }
     );
     
+    if (!imgA && !imgB) {
+      console.log('La imagen no se puede subir aun');
+    }else{
+      await addOrEditPartidoFutbol({...values,imgA,imgB})
+    }
+
   };
  
   const getPartidoFutbolById = async (id) => {

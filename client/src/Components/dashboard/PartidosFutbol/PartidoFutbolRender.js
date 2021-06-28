@@ -18,7 +18,7 @@ const PartidoFutbolRender = () => {
     };
     const onDeletePartidoFutbol = async(id)=>{
         if(window.confirm("Seguro que deseas eliminar el evento de Futbol?")){
-            await db.collection("Noticias-Futbol").doc(id).delete();
+            await db.collection("Partidos-Futbol").doc(id).delete();
         };
     };
     const addOrEditPartidoFutbol = async(partidoFutbolObject)=>{

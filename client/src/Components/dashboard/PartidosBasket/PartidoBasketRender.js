@@ -18,7 +18,7 @@ const PartidoBasketRender = () => {
     };
     const onDeletePartidoBasket = async(id)=>{
         if(window.confirm("Seguro que deseas eliminar el evento de Basket?")){
-            await db.collection("Noticias-Basket").doc(id).delete();
+            await db.collection("Partidos-Basket").doc(id).delete();
         };
     };
     const addOrEditPartidoBasket = async(partidoBasketObject)=>{

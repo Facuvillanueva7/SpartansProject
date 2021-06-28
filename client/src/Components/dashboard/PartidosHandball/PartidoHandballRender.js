@@ -18,7 +18,7 @@ const PartidoHandballRender = () => {
     };
     const onDeletePartidoHandball = async(id)=>{
         if(window.confirm("Seguro que deseas eliminar el evento de Handball?")){
-            await db.collection("Noticias-Handball").doc(id).delete();
+            await db.collection("Partidos-Handball").doc(id).delete();
         };
     };
     const addOrEditPartidoHandball = async(partidoHandballObject)=>{

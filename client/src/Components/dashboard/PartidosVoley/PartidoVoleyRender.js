@@ -18,7 +18,7 @@ const PartidoVoleyRender = () => {
     };
     const onDeletePartidoVoley = async(id)=>{
         if(window.confirm("Seguro que deseas eliminar el evento de voley?")){
-            await db.collection("Noticias-Voley").doc(id).delete();
+            await db.collection("Partidos-Voley").doc(id).delete();
         };
     };
     const addOrEditPartidoVoley = async(partidoVoleyObject)=>{
