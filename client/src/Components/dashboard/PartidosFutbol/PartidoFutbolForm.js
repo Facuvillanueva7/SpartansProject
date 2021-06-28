@@ -108,6 +108,11 @@ const PartidoFutbolForm = (props) => {
       }
     );
 
+    if (!imgA && !imgB){
+        console.log("No se puede subir la imagen aun");
+    } else {
+    await addOrEditPartidoFutbol({...values,imgA,imgB})
+    }
   };
  
   const getPartidoFutbolById = async (id) => {
