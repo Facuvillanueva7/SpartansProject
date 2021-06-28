@@ -1,17 +1,17 @@
 import React,{useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import {db} from '../../config/firebase'
-const Noticia = () => {
+const NoticiaBasketInd = () => {
     const  {id}    = useParams()
    const [Title, setTitle] = useState('')
    const [Body, setBody] = useState('')
    const [Copete, setCopete] = useState('')
    const [Fecha, setFecha] = useState('')
-   const [NoticiaImg, setNoticiaImg] = useState('')
+   const [NoticiaBasketImg, setNoticiaBasketImg] = useState('')
    const [Fuente, setFuente] = useState('')
-    const getNoticia = async()=>{
+    const getNoticiaBasket = async()=>{
             await db 
-           .collection("Noticias-general").doc(id)
+           .collection("Noticias-Basket").doc(id)
            .get()
            .then((doc=>{
                if (doc.exists){
@@ -19,7 +19,7 @@ const Noticia = () => {
                setBody(doc.data().Body)
                setCopete(doc.data().Copete)
                setFecha(doc.data().Fecha)
-               setNoticiaImg(doc.data().NoticiaImg)
+               setNoticiaBasketImg(doc.data().NoticiaBasketImg)
                setFuente(doc.data().Fuente)
                    console.log("Document data:", Title);
                } else {
@@ -30,7 +30,7 @@ const Noticia = () => {
            })
     }
     useEffect(()=>{
-        getNoticia()
+        getNoticiaBasket()
     })
     return (
         <>
@@ -40,7 +40,7 @@ const Noticia = () => {
                 <h5>{Copete}</h5>
                  <p>{Body}</p>
                  <div className="card-body">
-                    <img src={NoticiaImg} alt="sample" />
+                    <img src={NoticiaBasketImg} alt="sample" />
                  </div>
                  <p>{Fecha}</p>
                  <p>{Fuente}</p>
@@ -51,4 +51,4 @@ const Noticia = () => {
     )
 }
 
-export default Noticia
+export default NoticiaBasketInd
