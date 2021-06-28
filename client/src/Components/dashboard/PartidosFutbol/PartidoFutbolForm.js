@@ -107,12 +107,6 @@ const PartidoFutbolForm = (props) => {
         console.log(url2);
       }
     );
-    
-    if (!imgA && !imgB) {
-      console.log('La imagen no se puede subir aun');
-    }else{
-      await addOrEditPartidoFutbol({...values,imgA,imgB})
-    }
 
   };
  

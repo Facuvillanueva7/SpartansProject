@@ -11,6 +11,7 @@ import PartidoFutbolRender from "./Components/dashboard/PartidosFutbol/PartidoFu
 import PartidoHandballRender from "./Components/dashboard/PartidosHandball/PartidoHandballRender";
 import PartidoVoleyRender from "./Components/dashboard/PartidosVoley/PartidoVoleyRender";
 import Noticia from "./Components/Views/Noticia";
+import NoticiaBasketInd from "./Components/Views/NoticiaBasketInd";
 import Noticias from "./Components/Views/Noticias";
 import NoticiasBasket from "./Components/Views/NoticiasBasket";
 import NoticiasFisico from "./Components/Views/NoticiasFisico";
@@ -86,6 +87,7 @@ function App() {
           component={PartidoBasketRender}
           />
         <Route path="/noticia/:id" component={Noticia}/>
+        <Route path="/noticiabasket/:id" component={NoticiaBasketInd}/>
         </Router>
       </div>
     </div>

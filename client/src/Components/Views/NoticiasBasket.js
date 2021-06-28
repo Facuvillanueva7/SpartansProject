@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../config/firebase";
+import {Link } from 'react-router-dom'
 const NoticiasBasket = () => {
   const [noticiasBasket, setNoticiasBasket] = useState([]);
+  const [ currentId , setCurrentId] = useState("")
   const getNoticiasBasket = async () => {
     await db
       .collection("Noticias-Basket")
@@ -17,6 +19,19 @@ const NoticiasBasket = () => {
   useEffect(() => {
     getNoticiasBasket();
   });
+  const getNoticiaBasketIndividual = async (noticiaObject) => {
+    try {
+      if (currentId) {
+        const data = await db
+        .collection ("Noticias-Basket")
+        .doc(currentId)
+        .get();
+        console.log(data.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <div>
@@ -30,16 +45,18 @@ const NoticiasBasket = () => {
                       src={noticia?.NoticiaBasketImg}
                       style={{ width: "50%" }}
                       alt="sample"
+                      onClick={getNoticiaBasketIndividual}
                     />
                   )}
-                  <h4>{noticia.Title}</h4>
-                  <div className="container-">
-                    <p>{noticia.Body}</p>
+                  <Link to={"./noticiabasket/"+noticia.id}>
+                  <h4 onClick={()=>setCurrentId(noticia.id)}>{noticia.Title}</h4>
+                  <p>{noticia.Body.substring(0,100)}</p>
                     <p>{noticia.Copete}</p>
                     <p>{noticia.Description}</p>
                     <p>{noticia.Fuente}</p>
                     <p>{noticia.Fecha}</p>
-                  </div>
+                   </Link>
+                 
                 </div>
               </div>
             </div>

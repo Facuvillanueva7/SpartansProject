@@ -47,15 +47,7 @@ const Noticia = () => {
       .catch((error) => {
         console.log("Error getting document:", error);
       });
-    /* .onSnapshot((querysnapshot)=>{
-            const docs = [];
-            querysnapshot.forEach((doc)=>{
-                docs.push({...doc.data(),id:doc.id})
-            });
-            setNoticia(docs)
-           }) */
 
-    /* console.log(noticia.data());  */
   };
   useEffect(() => {
     getNoticia();

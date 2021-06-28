@@ -4,7 +4,6 @@ import { db } from "../../config/firebase";
 
 const Noticias = () => {
   const [noticias, setNoticias] = useState([]);
-  /* const [noticia,setNoticia]= useState() */
   const [currentId, setCurrentId] = useState("");
   const getNoticias = async () => {
     await db
