@@ -22,9 +22,13 @@ import PartidoFutbol from "./Components/Views/PartidoFutbol";
 import PartidoHandball from "./Components/Views/PartidoHandball";
 import PartidoVoley from "./Components/Views/PartidoVoley";
 
+
+
+
+
 function App() {
   return (
-    <div className="container">
+    <div className="container-fluid" style={{backgroundColor: 'rgb(26, 26, 26)'}}>
       <div className="row">
         <Router>
           <Route path="/dashboard" component={Dashboard} />
