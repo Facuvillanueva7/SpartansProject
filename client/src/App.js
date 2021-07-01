@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
+
+
 import Dashboard from "./Components/dashboard/Dashboard";
 import NoticiaFisicoRender from "./Components/dashboard/NoticiaFisico/NoticiaFisicoRener";
 import NoticiaBasketRender from "./Components/dashboard/NoticiasBasket/NoticiaBasketRender";
@@ -22,6 +25,7 @@ import PartidoBasket from "./Components/Views/PartidoBasket";
 import PartidoFutbol from "./Components/Views/PartidoFutbol";
 import PartidoHandball from "./Components/Views/PartidoHandball";
 import PartidoVoley from "./Components/Views/PartidoVoley";
+import NoticiaFutbolInd from './Components/Views/NoticiaFutbolInd';
 
 
 
@@ -88,6 +92,7 @@ function App() {
           />
         <Route path="/noticia/:id" component={Noticia}/>
         <Route path="/noticiabasket/:id" component={NoticiaBasketInd}/>
+        <Route path="/noticiafutbol/:id" component={NoticiaFutbolInd}/>
         </Router>
       </div>
     </div>
