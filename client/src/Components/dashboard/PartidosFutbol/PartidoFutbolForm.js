@@ -42,79 +42,80 @@ const PartidoFutbolForm = (props) => {
     const obj = values;
     obj[name] = value;
   };
-  const addOrEditPartidoFutbol = async (partidoFutbolObject) => {
-    try {
-      if (props.currentId)
-      return await db 
-      .collection("Partidos-Futbol")
-      .doc(props.currentId)
-      .update(partidoFutbolObject)
-        return await db
-          .collection("Partidos-Futbol")
-          .doc()
-          .set(partidoFutbolObject)
-          .then(() => {
-            console.log("Document successfuly written");
-          });
-    } catch (error) {
-      console.log("Error writing document: ", error);
-    }
-    setIsLoading(false);
-  };
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
-    const PartidoFutbolImg = storage
-      .ref(`Partidos-Futbol-Images/${file.name}`)
-      .put(file);
-    PartidoFutbolImg.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setIsLoading(progress !== 100);
-      },
-      () => {},
-      async () => {
-        const url = await storage
-          .ref("Partidos-Futbol-Images")
-          .child(file.name)
-          .getDownloadURL();
-        /*  addOrEditPartidoVoley({ ...values, PartidoVoleyImg: url }); */
-        setImgA(url); 
-      console.log(url);
-      }
-    );
-    const PartidoFutbolImg2 = storage
-      .ref(`Partidos-Futbol-Images-2/${file2.name}`)
-      .put(file2);
-    PartidoFutbolImg2.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-       /*  setIsLoading2(progress !== 100);
-        console.log(isLoading2); */
-        console.log(progress);
-      },
-      () => {},
-      async () => {
-        const url2 = await storage
-          .ref("Partidos-Futbol-Images-2")
-          .child(file2.name)
-          .getDownloadURL();
-/*         addOrEditPartidoVoley({ ...values, PartidoVoleyImg2: url2 });  */
-        setImgB(url2)
-        console.log(url2);
-      }
-    );
 
-    if (!imgA && !imgB){
-        console.log("No se puede subir la imagen aun");
-    } else {
-    await addOrEditPartidoFutbol({...values,imgA,imgB})
-    }
-  };
- 
+ }
+ const uploadImgA = ( ) => {
+  const PartidoFutbolImg = storage
+  .ref(`Partidos-Futbol-Images/${file.name}`)
+  .put(file);
+PartidoFutbolImg.on(
+  "state_changed",
+  (snapshot) => {
+    const progress =
+      (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    setIsLoading(progress !== 100);
+  },
+  () => {},
+  async () => {
+    const url = await storage
+      .ref("Partidos-Futbol-Images")
+      .child(file.name)
+      .getDownloadURL();
+    setImgA(url); 
+  console.log(url);
+  }
+);
+ }
+ const uploadImgB = () => {
+  const PartidoFutbolImg2 = storage
+  .ref(`Partidos-Futbol-Images-2/${file2.name}`)
+  .put(file2);
+PartidoFutbolImg2.on(
+  "state_changed",
+  (snapshot) => {
+    const progress =
+      (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log(progress);
+  },
+  () => {},
+  async () => {
+    const url2 = await storage
+      .ref("Partidos-Futbol-Images-2")
+      .child(file2.name)
+      .getDownloadURL();
+    setImgB(url2)
+    console.log(url2);
+  }
+);
+ }
+ const addOrEditPartidoFutbol = async (partidoFutbolObject) => {
+  try {
+    if (props.currentId)
+    return await db 
+    .collection("Partidos-Futbol")
+    .doc(props.currentId)
+    .update(partidoFutbolObject)
+      return await db
+        .collection("Partidos-Futbol")
+        .doc()
+        .set(partidoFutbolObject)
+        .then(() => {
+          console.log("Document successfuly written");
+        });
+  } catch (error) {
+    console.log("Error writing document: ", error);
+  }
+  setIsLoading(false);
+};
+ const submitPartido = async () => {
+  if (!imgA && !imgB){
+    console.log("No se puede subir el partido aun");
+} else {
+await addOrEditPartidoFutbol({...values,imgA,imgB})
+}
+};
   const getPartidoFutbolById = async (id) => {
     if (!id) return;
     const doc = await db.collection("Partidos-Futbol").doc(id.toString()).get();
@@ -202,15 +203,21 @@ const PartidoFutbolForm = (props) => {
           type="file"
           name="IMG1"
           placeholder="Imagen equipo 1"
-          onChange={partidoFutbolImgHandler}
+           onChange={partidoFutbolImgHandler} 
         />
+        <button className="btn btn-success mb-1" onClick={uploadImgA}>
+          Confirmar imagen 1 
+        </button>
         <input
           type="file"
           name="IMG2"
           placeholder="Imagen equipo 2"
-          onChange={partidoFutbolImg2Handler}
+           onChange={partidoFutbolImg2Handler} 
         />
-        <button className="btn btn-primary btn-block" disabled={isLoading}>
+         <button className="btn btn-success mb-1" onClick={uploadImgB}>
+          Confirmar imagen 2 
+        </button>
+        <button className="btn btn-primary btn-block" disabled={isLoading} onClick={submitPartido}>
           {props.currentId === "" ? "Save" : "Update"}
         </button>
       </form>
