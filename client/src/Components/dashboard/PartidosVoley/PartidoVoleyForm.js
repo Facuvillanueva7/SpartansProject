@@ -42,48 +42,32 @@ const PartidoVoleyForm = (props) => {
     const obj = values;
     obj[name] = value;
   };
-  const addOrEditPartidoVoley = async (partidoVoleyObject) => {
-    try {
-      if (props.currentId)
-      return await db 
-      .collection("Partidos-Voley")
-      .doc(props.currentId)
-      .update(partidoVoleyObject)
-        return await db
-          .collection("Partidos-Voley")
-          .doc()
-          .set(partidoVoleyObject)
-          .then(() => {
-            console.log("Document successfuly written");
-          });
-    } catch (error) {
-      console.log("Error writing document: ", error);
-    }
-    setIsLoading(false);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ 
+  const uploadImgA = () => {
     const PartidoVoleyImg = storage
-      .ref(`Partidos-Voley-Images/${file.name}`)
-      .put(file);
-    PartidoVoleyImg.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setIsLoading(progress !== 100);
-      },
-      () => {},
-      async () => {
-        const url = await storage
-          .ref("Partidos-Voley-Images")
-          .child(file.name)
-          .getDownloadURL();
-        /*  addOrEditPartidoVoley({ ...values, PartidoVoleyImg: url }); */
-        setImgA(url); 
-      console.log(url);
-      }
-    );
+    .ref(`Partidos-Voley-Images/${file.name}`)
+    .put(file);
+  PartidoVoleyImg.on(
+    "state_changed",
+    (snapshot) => {
+      const progress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setIsLoading(progress !== 100);
+    },
+    () => {},
+    async () => {
+      const url = await storage
+        .ref("Partidos-Voley-Images")
+        .child(file.name)
+        .getDownloadURL();
+      /*  addOrEditPartidoVoley({ ...values, PartidoVoleyImg: url }); */
+      setImgA(url); 
+    console.log(url);
+    }
+  );
+  }
+  const uploadImgB = () => {
+  
     const PartidoVoleyImg2 = storage
       .ref(`Partidos-Voley-Images-2/${file2.name}`)
       .put(file2);
@@ -105,12 +89,36 @@ const PartidoVoleyForm = (props) => {
 /*         addOrEditPartidoVoley({ ...values, PartidoVoleyImg2: url2 });  */
         setImgB(url2)
         console.log(url2);
-      },
-      addOrEditPartidoVoley({...values,imgA,imgB})
-    );
-    
+  })}
+  const addOrEditPartidoVoley = async (partidoVoleyObject) => {
+    try {
+      if (props.currentId)
+      return await db 
+      .collection("Partidos-Voley")
+      .doc(props.currentId)
+      .update(partidoVoleyObject)
+        return await db
+          .collection("Partidos-Voley")
+          .doc()
+          .set(partidoVoleyObject)
+          .then(() => {
+            console.log("Document successfuly written");
+          });
+    } catch (error) {
+      console.log("Error writing document: ", error);
+    }
+    setIsLoading(false);
   };
- 
+  const handleSubmit = (e) => {
+    e.preventDefault()  
+  };
+  const submitPartido = async () => {
+    if(!imgA && !imgB){
+      console.log("No se puede subir el partido aún");
+    } else {
+      await addOrEditPartidoVoley({...values,imgA,imgB})
+    }
+  }
   const getPartidoVoleyById = async (id) => {
     if (!id) return;
     const doc = await db.collection("Partidos-Voley").doc(id.toString()).get();
@@ -200,13 +208,19 @@ const PartidoVoleyForm = (props) => {
           placeholder="Imagen equipo 1"
           onChange={partidoVoleyImgHandler}
         />
+        <button className="btn btn-success mb-1" onClick={uploadImgA}>
+          Confirmar imagen 1 
+        </button>
         <input
           type="file"
           name="IMG2"
           placeholder="Imagen equipo 2"
           onChange={partidoVoleyImg2Handler}
         />
-        <button className="btn btn-primary btn-block" disabled={isLoading}>
+        <button className="btn btn-success mb-1" onClick={uploadImgB}>
+          Confirmar imagen 2
+        </button>
+        <button className="btn btn-primary btn-block" disabled={isLoading} onClick={submitPartido}>
           {props.currentId === "" ? "Save" : "Update"}
         </button>
       </form>

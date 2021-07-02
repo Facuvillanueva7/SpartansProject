@@ -42,6 +42,55 @@ const PartidoBasketForm = (props) => {
     const obj = values;
     obj[name] = value;
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+  }
+  const uploadImgA = () => {
+    const PartidoBasketImg = storage
+    .ref(`Partidos-Basket-Images/${file.name}`)
+    .put(file);
+  PartidoBasketImg.on(
+    "state_changed",
+    (snapshot) => {
+      const progress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setIsLoading(progress !== 100);
+    },
+    () => {},
+    async () => {
+      const url = await storage
+        .ref("Partidos-Basket-Images")
+        .child(file.name)
+        .getDownloadURL();
+        setImgA(url); 
+    console.log(url);
+    }
+  );
+  }
+  const uploadImgB = () => {
+    const PartidoBasketImg2 = storage
+    .ref(`Partidos-Basket-Images-2/${file2.name}`)
+    .put(file2);
+  PartidoBasketImg2.on(
+    "state_changed",
+    (snapshot) => {
+      const progress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+     /*  setIsLoading2(progress !== 100);
+      console.log(isLoading2); */
+      console.log(progress);
+    },
+    () => {},
+    async () => {
+      const url2 = await storage
+        .ref("Partidos-Basket-Images-2")
+        .child(file2.name)
+        .getDownloadURL();
+        setImgB(url2)
+      console.log(url2);
+    }
+  );
+  }
   const addOrEditPartidoBasket = async (partidoBasketObject) => {
     try {
       if (props.currentId)
@@ -61,56 +110,13 @@ const PartidoBasketForm = (props) => {
     }
     setIsLoading(false);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const PartidoBasketImg = storage
-      .ref(`Partidos-Basket-Images/${file.name}`)
-      .put(file);
-    PartidoBasketImg.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setIsLoading(progress !== 100);
-      },
-      () => {},
-      async () => {
-        const url = await storage
-          .ref("Partidos-Basket-Images")
-          .child(file.name)
-          .getDownloadURL();
-        /*  addOrEditPartidoVoley({ ...values, PartidoVoleyImg: url }); */
-        setImgA(url); 
-      console.log(url);
-      }
-    );
-    const PartidoBasketImg2 = storage
-      .ref(`Partidos-Basket-Images-2/${file2.name}`)
-      .put(file2);
-    PartidoBasketImg2.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-       /*  setIsLoading2(progress !== 100);
-        console.log(isLoading2); */
-        console.log(progress);
-      },
-      () => {},
-      async () => {
-        const url2 = await storage
-          .ref("Partidos-Basket-Images-2")
-          .child(file2.name)
-          .getDownloadURL();
-/*         addOrEditPartidoVoley({ ...values, PartidoVoleyImg2: url2 });  */
-        setImgB(url2)
-        console.log(url2);
-      },
-      addOrEditPartidoBasket({...values,imgA,imgB})
-    );
-    
-  };
- 
+  const submitPartido = async () => {
+    if(!imgA && !imgB) {
+      console.log("No se puede subir el partido aún");
+    }else{
+     await addOrEditPartidoBasket({...values,imgA,imgB})
+    }
+  }
   const getPartidoBasketById = async (id) => {
     if (!id) return;
     const doc = await db.collection("Partidos-Basket").doc(id.toString()).get();
@@ -200,13 +206,19 @@ const PartidoBasketForm = (props) => {
           placeholder="Imagen equipo 1"
           onChange={partidoBasketImgHandler}
         />
+        <button className="btn btn-success mb-1" onClick={uploadImgA}>
+          Confirmar imagen 1
+        </button>
         <input
           type="file"
           name="IMG2"
           placeholder="Imagen equipo 2"
           onChange={partidoBasketImg2Handler}
         />
-        <button className="btn btn-primary btn-block" disabled={isLoading}>
+        <button className="btn btn-success mb-1" onClick={uploadImgB}>
+          Confirmar imagen 2
+        </button>
+        <button className="btn btn-primary btn-block" disabled={isLoading} onClick={submitPartido}>
           {props.currentId === "" ? "Save" : "Update"}
         </button>
       </form>
