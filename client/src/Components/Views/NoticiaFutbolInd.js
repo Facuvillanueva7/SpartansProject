@@ -1,7 +1,7 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useParams, NavLink } from 'react-router-dom';
-import {db} from '../../config/firebase'
+import { useParams, NavLink } from "react-router-dom";
+import { db } from "../../config/firebase";
 
 //CSS
 import "../../assets/bootstrap/css/bootstrap.min.css";
@@ -16,41 +16,45 @@ import "../../assets/css/Projects-Clean.css";
 import "../../assets/css/Social-Icons.css";
 import "../../assets/css/styles.css";
 
+const NoticiaFutbolInd = () => {
+  const { id } = useParams();
+  /*  const [noticia,setNoticia]= useState([]); */
+  const [Title, setTitle] = useState("");
+  const [Body, setBody] = useState("");
+  const [Copete, setCopete] = useState("");
+  const [Fecha, setFecha] = useState("");
+  const [NoticiaFutbolImg, setNoticiaFutbolImg] = useState("");
+  const [Fuente, setFuente] = useState("");
+  const getNoticiaFutbolIndividual = async () => {
+    await db
+      .collection("Noticias-Futbol")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          /*     setNoticia(doc) */
+          setTitle(doc.data().Title);
+          setBody(doc.data().Body);
+          setCopete(doc.data().Copete);
+          setFecha(doc.data().Fecha);
+          setNoticiaFutbolImg(doc.data().NoticiaFutbolImg);
+          setFuente(doc.data().Fuente);
+          console.log("Document data:", Body, NoticiaFutbolImg);
+        } else {
+          console.log("No matchs");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
 
-const NoticiaBasketInd = () => {
-    const  {id}    = useParams()
-   const [Title, setTitle] = useState('')
-   const [Body, setBody] = useState('')
-   const [Copete, setCopete] = useState('')
-   const [Fecha, setFecha] = useState('')
-   const [NoticiaBasketImg, setNoticiaBasketImg] = useState('')
-   const [Fuente, setFuente] = useState('')
-    const getNoticiaBasket = async()=>{
-            await db 
-           .collection("Noticias-Basket").doc(id)
-           .get()
-           .then((doc=>{
-               if (doc.exists){
-               setTitle(doc.data().Title)
-               setBody(doc.data().Body)
-               setCopete(doc.data().Copete)
-               setFecha(doc.data().Fecha)
-               setNoticiaBasketImg(doc.data().NoticiaBasketImg)
-               setFuente(doc.data().Fuente)
-                   console.log("Document data:", Title);
-               } else {
-                   console.log("No matchs");
-               }
-           })).catch((error)=>{
-               console.log("Error getting document:", error);
-           })
-    }
-    useEffect(()=>{
-        getNoticiaBasket()
-    })
-    return (
-        <>
-<Navbar
+  };
+  useEffect(() => {
+    getNoticiaFutbolIndividual();
+  });
+  return (
+    <>
+      <Navbar
         className="fixed-top float-right"
         collapseOnSelect
         expand="md"
@@ -92,8 +96,8 @@ const NoticiaBasketInd = () => {
                   <p className="text-light">{Copete}</p>
                   <img
                     className="img-fluid"
-                    src={NoticiaBasketImg}
-                    alt="Imagen Basquetbolista"
+                    src={NoticiaFutbolImg}
+                    alt="Imagen Futbolista"
                   />
                 </div>
                 <div className="text">
@@ -127,8 +131,8 @@ const NoticiaBasketInd = () => {
           </div>
         </div>
       }
-        </>
-    )
-}
+    </>
+  );
+};
 
-export default NoticiaBasketInd
+export default NoticiaFutbolInd;
