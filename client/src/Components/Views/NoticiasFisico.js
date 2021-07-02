@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import { db } from "../../config/firebase";
 const NoticiasFisico = () => {
   const [noticiasFisico, setNoticiasFisico] = useState([]);
@@ -32,14 +33,14 @@ const NoticiasFisico = () => {
                       alt="sample"
                     />
                   )}
+                  <Link to={"./noticiafisico/" + noticia.id}>
                   <h4>{noticia.Title}</h4>
-                  <div className="container-">
                     <p>{noticia.Body}</p>
                     <p>{noticia.Copete}</p>
                     <p>{noticia.Description}</p>
                     <p>{noticia.Fuente}</p>
                     <p>{noticia.Fecha}</p>
-                  </div>
+                    </Link>
                 </div>
               </div>
             </div>
