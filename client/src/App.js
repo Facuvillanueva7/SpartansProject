@@ -13,7 +13,7 @@ import PartidoBasketRender from "./Components/dashboard/PartidosBasket/PartidoBa
 import PartidoFutbolRender from "./Components/dashboard/PartidosFutbol/PartidoFutbolRender";
 import PartidoHandballRender from "./Components/dashboard/PartidosHandball/PartidoHandballRender";
 import PartidoVoleyRender from "./Components/dashboard/PartidosVoley/PartidoVoleyRender";
-import Noticia from "./Components/Views/Noticia";
+import Noticia from "./Components/Views/NoticiaInd";
 import NoticiaBasketInd from "./Components/Views/NoticiaBasketInd";
 import Noticias from "./Components/Views/Noticias";
 import NoticiasBasket from "./Components/Views/NoticiasBasket";
@@ -26,6 +26,9 @@ import PartidoFutbol from "./Components/Views/PartidoFutbol";
 import PartidoHandball from "./Components/Views/PartidoHandball";
 import PartidoVoley from "./Components/Views/PartidoVoley";
 import NoticiaFutbolInd from './Components/Views/NoticiaFutbolInd';
+import NoticiaFisicoInd from "./Components/Views/NoticiaFisicoInd";
+import NoticiaHandballInd from "./Components/Views/NoticiaHandballInd";
+import NoticiaVoleyInd from "./Components/Views/NoticiaVoleyInd";
 
 
 
@@ -90,9 +93,13 @@ function App() {
           path="/dashboard/partidosbasket"
           component={PartidoBasketRender}
           />
+          {/* Rutas de Noticias que se renderizan individualmente */}
         <Route path="/noticia/:id" component={Noticia}/>
         <Route path="/noticiabasket/:id" component={NoticiaBasketInd}/>
         <Route path="/noticiafutbol/:id" component={NoticiaFutbolInd}/>
+        <Route path="/noticiafisico/:id" component={NoticiaFisicoInd}/>
+        <Route path="/noticiahandball/:id" component={NoticiaHandballInd}/>
+        <Route path="/noticiavoley/:id" component={NoticiaVoleyInd}/>
         </Router>
       </div>
     </div>

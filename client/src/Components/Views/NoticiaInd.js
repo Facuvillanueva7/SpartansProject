@@ -114,13 +114,6 @@ const Noticia = () => {
                       alt="Beach"
                     />
                   </figure>
-                  <p className="text-light" style={{ fontSize: "21px" }}>
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae. Suspendisse vel placerat
-                    ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum.
-                    Etiam quis tristique lectus. Aliquam in arcu eget velit
-                    pulvinar dictum vel in justo.
-                  </p>
                   <p className="text-center" style={{ fontSize: "15px" }}>
                     <span className="text-light date">{Fecha}</span>
                     <span className="text-light by">&nbsp;by {Fuente}</span>
