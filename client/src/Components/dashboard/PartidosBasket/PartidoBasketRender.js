@@ -52,11 +52,11 @@ const PartidoBasketRender = () => {
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th>Fecha</th>
-                <th>Titulo</th>
-                <th>Copete</th>
-                <th>Cuerpo</th>
-                <th>Fuente</th>
+                <th>Equipo 1</th>
+                <th>Equipo 2</th>
+                <th>Fecha del Partido</th>
+                <th>MVP 1</th>
+                <th>MVP 2</th>
                 <th>Editar</th>
                 <th>Borrar</th>
               </tr>
@@ -67,8 +67,6 @@ const PartidoBasketRender = () => {
                   <td>{partido.Equipo_1}</td>
                   <td>{partido.Equipo_2}</td>
                   <td>{partido.Fecha_Partido}</td>
-                  <td>{partido.Ultimo_Partido}</td>
-                  <td>{partido.Descripcion}</td>
                   <td>{partido.MVP_1}</td>
                   <td>{partido.MVP_2}</td>
                   <td>
