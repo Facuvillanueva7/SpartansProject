@@ -5,6 +5,7 @@ const PartidoHandball = () => {
     const getPartidosHandball =async()=>{
         await db.collection("Partidos-Handball")
         .orderBy("Date","desc")
+        .limit(4)
         .onSnapshot((querysnapshot)=>{
             const docs =[]
             querysnapshot.forEach((doc)=>{

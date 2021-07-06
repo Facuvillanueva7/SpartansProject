@@ -7,6 +7,7 @@ const NoticiasVoley = () => {
     await db
       .collection("Noticias-Voley")
       .orderBy("Date", "desc")
+      .limit(4)
       .onSnapshot((querysnapshot) => {
         const docs = [];
         querysnapshot.forEach((doc) => {

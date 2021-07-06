@@ -8,6 +8,7 @@ const NoticiasFutbol = () => {
     await db
       .collection("Noticias-Futbol")
       .orderBy("Date", "desc")
+      .limit(4)
       .onSnapshot((querysnapshot) => {
         const docs = [];
         querysnapshot.forEach((doc) => {
