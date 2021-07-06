@@ -1,7 +1,9 @@
 import React,{useEffect,useState} from 'react'
+import {Link} from 'react-router-dom'
 import {db} from '../../config/firebase'
 const PartidoFutbol = () => {
     const [partidosFutbol,setPartidosFutbol]=useState([]);
+    const [CurrentId, setCurrentId] = useState();
     const getPartidosFutbol =async()=>{
         await db.collection("Partidos-Futbol")
         .orderBy("Date","desc")
@@ -17,6 +19,19 @@ const PartidoFutbol = () => {
     useEffect(()=>{
         getPartidosFutbol();
     })
+    const getPartidoFutbolIndividual = async () => {
+      try {
+        if(CurrentId) {
+          const data = await db 
+          .collection("Partidos-Futbol")
+          .doc(CurrentId)
+          .get();
+          console.log(data.id);
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
     return (
         <>
         <div>
@@ -30,13 +45,16 @@ const PartidoFutbol = () => {
                         src={partido?.imgA}
                         style={{ width: "50%" }}
                         alt="sample"
+
                       />
                     )}
                     {partido.imgB && (
                         <img src={partido?.imgB} alt="sample" style={{width:"50%"}} />
                     )}
-                    <h4>{partido.Title}</h4>
-                    <div className="container-">
+                    <h6 onClick={getPartidoFutbolIndividual}>Ir al evento!</h6>
+                  <Link to={"./partidofutbol/"+partido.id}>
+                    <h4 onClick={()=>setCurrentId}>{partido.Title}</h4>
+                    <div className="container">
                     <p>{partido.Equipo_1}</p>
                     <p>{partido.Equipo_2}</p>
                     <p>{partido.Fecha_Partido}</p>
@@ -44,6 +62,7 @@ const PartidoFutbol = () => {
                     <p>{partido.MVP_1}</p>
                     <p>{partido.MVP_2}</p>
                     </div>
+                    </Link>
                   </div>
                 </div>
               </div>
