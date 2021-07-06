@@ -7,6 +7,7 @@ const NoticiasHandball = () => {
         await db
         .collection("Noticias-Handball")
         .orderBy("Date","desc")
+        .limit(4)
         .onSnapshot((querysnapshot)=>{
             const docs = []
             querysnapshot.forEach((doc)=>{
