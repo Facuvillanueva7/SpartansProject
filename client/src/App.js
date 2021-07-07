@@ -31,6 +31,8 @@ import NoticiaHandballInd from "./Components/Views/NoticiaHandballInd";
 import NoticiaVoleyInd from "./Components/Views/NoticiaVoleyInd";
 import PartidoFutbolInd from "./Components/Views/PartidoFutbolInd";
 import PartidoHandballInd from "./Components/Views/PartidoHandballInd";
+import PartidoBasketInd from "./Components/Views/PartidoBasketInd";
+import PartidoVoleyInd from "./Components/Views/PartidoVoleyInd";
 
 
 
@@ -105,6 +107,8 @@ function App() {
                {/* Rutas de Partidos que se renderizan individualmente */}
         <Route path="/partidofutbol/:id" component={PartidoFutbolInd}/>
         <Route path="/partidohandball/:id" component={PartidoHandballInd}/>
+        <Route path="/partidobasket/:id" component={PartidoBasketInd}/>
+        <Route path="/partidovoley/:id" component={PartidoVoleyInd}/>
         </Router>
       </div>
     </div>

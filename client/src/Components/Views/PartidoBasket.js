@@ -19,6 +19,7 @@ import Background from "../../assets/img/Basquebolista.png";
 
 const PartidoBasket = () => {
   const [partidosBasket, setPartidosBasket] = useState([]);
+  const [CurrentId,setCurrentId] = useState("");
   const getPartidosBasket = async () => {
     await db
       .collection("Partidos-Basket")
@@ -35,6 +36,19 @@ const PartidoBasket = () => {
   useEffect(() => {
     getPartidosBasket();
   });
+  const getPartidoBasketIndividual = async () => {
+    try {
+      if(CurrentId) {
+        const data = await db
+        .collection("Partidos-Basket")
+        .doc(CurrentId)
+        .get()
+        console.log(data.id);
+      }
+    } catch(error) {
+      console.error(error)
+    }
+  }
   return (
     <>
       <Navbar
@@ -125,11 +139,15 @@ const PartidoBasket = () => {
                   />
                 )}
               </div>
-              <h4 className="text-break text-center text-light">
+              <h4 onClick={getPartidoBasketIndividual} className="text-break text-center text-light">
+               
                 {partido.Equipo_1} vs {partido.Equipo_2}
               </h4>
               <p className="text-center text-white">{partido.Fecha_Partido}</p>
-            </div>
+                  <Link to={"./partidobasket/" +partido.id}>
+                    <h4 onClick={()=>setCurrentId}> ir al evento</h4>
+                  </Link>
+              </div>
           ))}
         </div>
       </div>
