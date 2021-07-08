@@ -51,6 +51,15 @@ const PartidoFutbol = () => {
                     {partido.imgB && (
                         <img src={partido?.imgB} alt="sample" style={{width:"50%"}} />
                     )}
+                     {partido.imgC && (
+                        <img src={partido?.imgC} alt="sample" style={{width:"50%"}} />
+                    )}
+                     {partido.imgD && (
+                        <img src={partido?.imgD} alt="sample" style={{width:"50%"}} />
+                    )}
+                     {partido.imgE && (
+                        <img src={partido?.imgE} alt="sample" style={{width:"50%"}} />
+                    )}
                     <h6 onClick={getPartidoFutbolIndividual}>Ir al evento!</h6>
                   <Link to={"./partidofutbol/"+partido.id}>
                     <h4 onClick={()=>setCurrentId}>{partido.Title}</h4>
