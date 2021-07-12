@@ -41,9 +41,17 @@ const Noticias = () => {
             <div className="card-mb-1" key={noticia.id}>
               <div className="card-body">
                 <div className="d-flex justify-content-between">
-                  {noticia.NoticiaImg && (
+                  {noticia.imgA && (
                     <img
-                      src={noticia?.NoticiaImg}
+                      src={noticia?.imgA}
+                      style={{ width: "50%" }}
+                      alt="sample"
+                      onClick={getNoticiaIndividual}
+                    />
+                  )}
+                  {noticia.imgB && (
+                    <img
+                      src={noticia?.imgB}
                       style={{ width: "50%" }}
                       alt="sample"
                       onClick={getNoticiaIndividual}
