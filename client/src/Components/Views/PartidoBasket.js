@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../config/firebase";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
+import Header from '../Views/Header'
 
 //CSS
 import "../../assets/bootstrap/css/bootstrap.min.css";
@@ -15,7 +16,7 @@ import "../../assets/css/Navigation-with-Button.css";
 import "../../assets/css/Projects-Clean.css";
 import "../../assets/css/Social-Icons.css";
 import "../../assets/css/styles.css";
-import Background from "../../assets/img/Basquebolista.png";
+
 
 const PartidoBasket = () => {
   const [partidosBasket, setPartidosBasket] = useState([]);
@@ -23,7 +24,6 @@ const PartidoBasket = () => {
     await db
       .collection("Partidos-Basket")
       .orderBy("Date", "desc")
-      .limit(4)
       .onSnapshot((querysnapshot) => {
         const docs = [];
         querysnapshot.forEach((doc) => {
@@ -76,34 +76,8 @@ const PartidoBasket = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <header
-        style={{
-          width: "100%",
-          height: "100%", //seguir probando tamaño de header
-        }}
-      >
-        <div
-          className="jumbotron jumbotron-fluid"
-          style={{
-            backgroundImage: `url(${Background})`,
-            backgroundColor: "rgba(255,255,255,0.3)",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <h1>Titulo Noticia</h1>
-          <p>
-            Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-            odio, dapibus ac facilisis in, egestas eget quam.
-          </p>
-          <p>
-            <Link to="/" className="btn btn-outline-dark" role="button">
-              Learn more
-            </Link>
-          </p>
-        </div>
-      </header>
-      <div className="container">
+      <Header/>
+      <div className="container" style={{}}>
         <div className="row">
           <div className="col-md-12">
             <h2 className="text-light">Proximos Partidos</h2>
@@ -121,7 +95,6 @@ const PartidoBasket = () => {
                     className="img-fluid d-inline-block"
                     src={partido?.imgA}
                     alt="Partido Basket"
-                    style={{ marginLeft: "0px" }}
                   />
                 )}
               </div>
