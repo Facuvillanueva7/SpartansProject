@@ -24,6 +24,7 @@ const Noticia = () => {
   const [Copete, setCopete] = useState("");
   const [Fecha, setFecha] = useState("");
   const [NoticiaImg, setNoticiaImg] = useState("");
+  const [NoticiaImg2,setNoticiaImg2]= useState("");
   const [Fuente, setFuente] = useState("");
   const getNoticia = async () => {
     await db
@@ -37,7 +38,8 @@ const Noticia = () => {
           setBody(doc.data().Body);
           setCopete(doc.data().Copete);
           setFecha(doc.data().Fecha);
-          setNoticiaImg(doc.data().NoticiaImg);
+          setNoticiaImg(doc.data().imgA);
+          setNoticiaImg2(doc.data().imgB);
           setFuente(doc.data().Fuente);
           console.log("Document data:", Body, NoticiaImg);
         } else {
@@ -99,6 +101,7 @@ const Noticia = () => {
                     src={NoticiaImg}
                     alt="Imagen Basquetbolista"
                   />
+                  <img src={NoticiaImg2} alt="sample"  />
                 </div>
                 <div className="text">
                   <p
