@@ -23,6 +23,7 @@ const NoticiaBasketInd = () => {
   const [Copete, setCopete] = useState("");
   const [Fecha, setFecha] = useState("");
   const [NoticiaBasketImg, setNoticiaBasketImg] = useState("");
+  const [NoticiaBasketImg2, setNoticiaBasketImg2] = useState("");
   const [Fuente, setFuente] = useState("");
   const getNoticiaBasket = async () => {
     await db
@@ -35,7 +36,8 @@ const NoticiaBasketInd = () => {
           setBody(doc.data().Body);
           setCopete(doc.data().Copete);
           setFecha(doc.data().Fecha);
-          setNoticiaBasketImg(doc.data().NoticiaBasketImg);
+          setNoticiaBasketImg(doc.data().imgA);
+          setNoticiaBasketImg2(doc.data().imgB);
           setFuente(doc.data().Fuente);
           console.log("Document data:", Title);
         } else {
@@ -73,6 +75,12 @@ const NoticiaBasketInd = () => {
                     src={NoticiaBasketImg}
                     alt="Imagen Basquet"
                   />
+                  <img
+                    className="img-fluid"
+                    src={NoticiaBasketImg2}
+                    alt="Imagen Basquet"
+                  />
+                  
                 </div>
                 <div className="text">
                   <p
@@ -88,6 +96,7 @@ const NoticiaBasketInd = () => {
                       alt="Beach"
                     />
                   </figure>
+
                   <p className="text-center" style={{ fontSize: "15px" }}>
                     <span className="text-light date">{Fecha}</span>
                     <span className="text-light by">&nbsp;by {Fuente}</span>

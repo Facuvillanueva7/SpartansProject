@@ -115,10 +115,19 @@ const NoticiasBasket = () => {
           <div className="row article">
             {noticiasBasket.map((noticia) => (
               <div className="col-sm-6 col-md-4 item" key={noticia.id}>
-                {noticia.NoticiaBasketImg && (
+                {noticia.imgA && (
                   <img
                     className="img-fluid"
-                    src={noticia?.NoticiaBasketImg}
+                    src={noticia?.imgA}
+                    style={{ width: "50%" }}
+                    alt="sample"
+                    onClick={getNoticiaBasketIndividual}
+                  />
+                )}
+                {noticia.imgB && (
+                  <img
+                    className="img-fluid"
+                    src={noticia?.imgB}
                     style={{ width: "50%" }}
                     alt="sample"
                     onClick={getNoticiaBasketIndividual}
