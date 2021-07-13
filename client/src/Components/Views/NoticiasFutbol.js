@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
+import BarraNavegacion from '../Views/BarraNavegacion';
+import Footer from '../Views/Footer';
+//CSS
+import "../../assets/bootstrap/css/bootstrap.min.css";
+import "../../assets/fonts/font-awesome.min.css";
+import "../../assets/fonts/ionicons.min.css";
+import "../../assets/css/Article-Clean.css";
+import "../../assets/css/Article-Dual-Column.css";
+import "../../assets/css/Article-List.css";
+import "../../assets/css/Footer-Dark.css";
+import "../../assets/css/Social-Icons.css";
+
+
+
 const NoticiasFutbol = () => {
   const [noticiasFutbol, setNoticiasFutbol] = useState([]);
   const [CurrentId, setCurrentId] = useState();
@@ -35,35 +49,38 @@ const NoticiasFutbol = () => {
   };
   return (
     <>
-      <div>
-        <div className="col-md-4 p-2">
-          {noticiasFutbol.map((noticia) => (
-            <div className="card-mb-1" key={noticia.id}>
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  {noticia.NoticiaFutbolImg && (
-                    <img
-                      src={noticia?.NoticiaFutbolImg}
-                      style={{ width: "50%" }}
-                      alt="sample"
-                      onClick={getNoticiaFutbolIndividual}
-                    />
-                  )}
-                  <Link to={"./noticiafutbol/" + noticia.id}>
-                    <h4 onClick={() =>setCurrentId}>{noticia.Title}</h4>
-
-                    <p>{noticia.Body}</p>
-                    <p>{noticia.Copete}</p>
-                    <p>{noticia.Description}</p>
-                    <p>{noticia.Fuente}</p>
-                    <p>{noticia.Fecha}</p>
-                  </Link>
-                </div>
+    <BarraNavegacion/>
+      <div
+        className="article-list"
+        style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+      >
+        <div className="container">
+          <div className="row article">
+            {noticiasFutbol.map((noticia) => (
+              <div className="col-sm-6 col-md-3 item" key={noticia.id}>
+                {noticia.NoticiaFutbolImg && (
+                  <img
+                    className="img-fluid"
+                    src={noticia?.NoticiaFutbolImg}
+                    alt="sample"
+                    onClick={getNoticiaFutbolIndividual}
+                  />
+                )}
+                <h3 className="text-white name" onClick={() => setCurrentId}>
+                  {noticia.Title}
+                </h3>
+                <p className="text-white-50 description">
+                  {noticia.Body.substring(0, 100)}
+                </p>
+                <Link to={"./noticiafutbol/" + noticia.id}>
+                  <p>Leer Mas</p>
+                </Link>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

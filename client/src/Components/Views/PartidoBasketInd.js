@@ -2,6 +2,8 @@
 import React, {useState,useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import { db } from "../../config/firebase";
+import BarraNavegacion from '../Views/BarraNavegacion';
+import Footer from '../Views/Footer'
 
 const PartidoBasketInd = () => {
     const {id} =useParams()
@@ -42,6 +44,7 @@ const PartidoBasketInd = () => {
     });
     return (
         <>
+        <BarraNavegacion/>
         <div className="container">
             <div className="row">
                 <h2>{Equipo_1}</h2>
@@ -52,6 +55,7 @@ const PartidoBasketInd = () => {
                 <img src={PartidoBasketImgB} alt="sample" style={{width:"50%"}}/>
             </div>
         </div>
+        <Footer/>
         </>
     )
 }

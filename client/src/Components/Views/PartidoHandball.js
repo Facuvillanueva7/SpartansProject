@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
 import {db} from '../../config/firebase'
+import BarraNavegacion from '../Views/BarraNavegacion';
+import Footer from '../Views/Footer'
 const PartidoHandball = () => {
     const [partidosHandball,setPartidosHandball]=useState([]);
     const [CurrentId,setCurrentId] = useState("")
@@ -34,7 +36,30 @@ const PartidoHandball = () => {
     }
     return (
         <>
-        <div>
+        <BarraNavegacion/>
+        <h2
+              className="text-light"
+              style={{
+                paddingTop: "18px",
+                position: "absolute",
+                zIndex: "2",
+                marginLeft: "30px"
+              }}
+            >
+              Titulo Noticia
+            </h2>
+            <p
+              className="text-white"
+              style={{
+                marginTop: "50px",
+                marginLeft: "30px",
+                position: "absolute",
+                zIndex: "3",
+              }}
+            >
+              Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
+              odio, dapibus ac facilisis in, egestas eget quam.
+            </p>        <div>
           <div className="col-md-4 p-2">
             {partidosHandball.map((partido) => (
               <div className="card-mb-1" key={partido.id}>
@@ -68,6 +93,7 @@ const PartidoHandball = () => {
             ))}
           </div>
         </div>
+        <Footer/>
       </>
     )
 }

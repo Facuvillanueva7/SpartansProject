@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
 import {db} from '../../config/firebase'
+import BarraNavegacion from '../Views/BarraNavegacion';
+import Footer from '../Views/Footer'
 const PartidoFutbol = () => {
     const [partidosFutbol,setPartidosFutbol]=useState([]);
     const [CurrentId, setCurrentId] = useState();
@@ -34,6 +36,47 @@ const PartidoFutbol = () => {
     }
     return (
         <>
+        <BarraNavegacion/>
+        <header style={{ marginLeft: "-11px"}}>
+        <div
+          className="jumbotron jumbotron-fluid"
+          style={{
+            marginRight: "-22px",
+            backgroundColor: "rgba(26,26,26)",
+          }}
+        >
+          <div>
+          <h2
+              className="text-light"
+              style={{
+                paddingTop: "18px",
+                position: "absolute",
+                zIndex: "2",
+                marginLeft: "30px"
+              }}
+            >
+              Titulo Noticia
+            </h2>
+            <p
+              className="text-white"
+              style={{
+                marginTop: "50px",
+                marginLeft: "30px",
+                position: "absolute",
+                zIndex: "3",
+              }}
+            >
+              Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
+              odio, dapibus ac facilisis in, egestas eget quam.
+            </p>
+            <img
+              className="img-fluid"
+              style={{ position: "relative", zIndex: "1", width: "100%" }}
+              alt="Partidos Basket"
+            />
+          </div>
+        </div>
+      </header>
         <div>
           <div className="col-md-4 p-2">
             {partidosFutbol.map((partido) => (
@@ -78,6 +121,7 @@ const PartidoFutbol = () => {
             ))}
           </div>
         </div>
+        <Footer/>
       </>
     )
 }

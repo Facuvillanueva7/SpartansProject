@@ -53,7 +53,7 @@ const PartidoBasket = () => {
   return (
     <>
       <BarraNavegacion />
-      <header style={{ marginLeft: "-11px"}}>
+      <header style={{ marginLeft: "-11px" }}>
         <div
           className="jumbotron jumbotron-fluid"
           style={{
@@ -62,22 +62,21 @@ const PartidoBasket = () => {
           }}
         >
           <div>
-            <h1
+            <h2
               className="text-light"
               style={{
-                paddingTop: "20px",
+                paddingTop: "18px",
                 position: "absolute",
                 zIndex: "2",
                 marginLeft: "30px",
-                //fontSize: "60px"
               }}
             >
               Titulo Noticia
-            </h1>
+            </h2>
             <p
               className="text-white"
               style={{
-                marginTop: "54px",
+                marginTop: "50px",
                 marginLeft: "30px",
                 position: "absolute",
                 zIndex: "3",
@@ -130,8 +129,6 @@ const PartidoBasket = () => {
           ))}
         </div>
       </div>
-
-      {/* FOOTER */}
       <Footer />
     </>
   );

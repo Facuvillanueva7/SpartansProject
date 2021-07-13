@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
+import BarraNavegacion from "../Views/BarraNavegacion";
+import Footer from "../Views/Footer";
 
 const Noticias = () => {
   const [noticias, setNoticias] = useState([]);
@@ -35,45 +37,39 @@ const Noticias = () => {
   };
   return (
     <>
-      <div>
-        <div className="col-md-4 p-2">
-          {noticias.map((noticia) => (
-            <div className="card-mb-1" key={noticia.id}>
-              <div className="card-body">
-                <div className="d-flex justify-content-between">
-                  {noticia.imgA && (
-                    <img
-                      src={noticia?.imgA}
-                      style={{ width: "50%" }}
-                      alt="sample"
-                      onClick={getNoticiaIndividual}
-                    />
-                  )}
-                  {noticia.imgB && (
-                    <img
-                      src={noticia?.imgB}
-                      style={{ width: "50%" }}
-                      alt="sample"
-                      onClick={getNoticiaIndividual}
-                    />
-                  )}
-                  <Link to={"./noticia/" + noticia.id}>
-                    <h4 onClick={() => setCurrentId(noticia.id)}>
-                      {noticia.Title}
-                    </h4>
-
-                    <p>{noticia.Body.substring(0, 100)}</p>
-
-                    <p>{noticia.Copete}</p>
-                    <p>{noticia.Fuente}</p>
-                    <p>{noticia.Fecha}</p>
-                  </Link>
-                </div>
+      <BarraNavegacion />
+      <div
+        className="article-list"
+        style={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+      >
+        <div className="container">
+          <div className="row article">
+            {noticias.map((noticia) => (
+              <div className="col-sm-6 col-md-3 item" key={noticia.id}>
+                {noticia.NoticiaImg && (
+                  <img
+                    className="img-fluid"
+                    src={noticia?.NoticiaImg}
+                    alt="sample"
+                    onClick={getNoticiaIndividual}
+                  />
+                )}
+                <h3
+                  className="text-white name"
+                  onClick={() => setCurrentId(noticia.id)}
+                >
+                  {noticia.Title}
+                </h3>
+                <p>{noticia.Body.substring(0, 100)}</p>
+                <Link to={"./noticia/" + noticia.id}>
+                  <p>Leer Mas</p>
+                </Link>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

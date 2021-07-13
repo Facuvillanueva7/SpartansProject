@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import "../../assets/bootstrap/css/bootstrap.min.css";
 import "../../assets/css/styles.css";
 
-const Barradenavegacion = () => {
+const BarraNavegacion = () => {
   return (
     <Navbar
       className="fixed-top float-right"
@@ -48,4 +48,4 @@ const Barradenavegacion = () => {
   );
 };
 
-export default Barradenavegacion;
+export default BarraNavegacion;
